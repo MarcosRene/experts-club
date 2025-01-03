@@ -6,18 +6,18 @@ export const getAbilitiesByUser = (user: UserType) => {
   const abilities: Record<UserType, ActionsSubjectsAbility[]> = {
     USER: [
       {
-        actions: 'create',
-        subjects: 'Task',
+        action: 'update',
+        subject: 'Task',
       },
     ],
     ADMIN: [
       {
-        actions: 'create',
-        subjects: 'Task',
+        action: 'create',
+        subject: 'Task',
       },
       {
-        actions: 'update',
-        subjects: 'Task',
+        action: 'delete',
+        subject: 'Task',
       },
     ],
   }
