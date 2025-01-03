@@ -1,17 +1,24 @@
+import { useState } from 'react'
 import { AbilityContext } from './contexts/ability-context'
 import { buildAbility } from './guards/ability'
-import { getAbilitiesByUser } from './guards/useAbilities'
+import { getAbilitiesByUser, UserType } from './guards/useAbilities'
 import { Home } from './pages/Home'
+import { Button } from './components/button'
 
 function App() {
-  const abilities = getAbilitiesByUser('USER')
+  const [currentUser, setCurrentUser] = useState<UserType>('ADMIN')
+  const abilities = getAbilitiesByUser(currentUser)
   const ability = buildAbility(abilities)
+
+  function handleUserChange(user: UserType) {
+    setCurrentUser(user)
+  }
 
   return (
     <AbilityContext.Provider value={ability}>
-      <div className="App">
-        <Home />
-      </div>
+      <Button onClick={() => handleUserChange('ADMIN')}>ADMIN</Button>
+      <Button onClick={() => handleUserChange('USER')}>USER</Button>
+      <Home />
     </AbilityContext.Provider>
   )
 }
